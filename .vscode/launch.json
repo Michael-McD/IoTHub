@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "remote console",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "deploy",
+            "program": "dotnet",
+            "args": [
+                "Opener.dll"
+            ],
+            "cwd": "/home/pi/src/GarageOpener",
+            "pipeTransport": {
+                "pipeProgram": "/usr/bin/ssh",
+                "pipeArgs": [
+                    "-T", "-i", "/home/michael/.ssh/id_rsa",
+                    "pi@192.168.0.18"
+                ],
+                "debuggerPath": "/home/pi/vsdbg/vsdbg"
+            },
+            // "sourceFileMap": {
+            //     "/home/michael/src/GarageOpener/Opener": "/home/pi/src/GarageOpener"
+            // },
+            "logging": {
+                "engineLogging": true
+            }
+        }
+    ]
+}

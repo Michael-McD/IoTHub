@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "/property:GenerateFullPaths=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Opener"
+            },
+            "group": "build",
+            "presentation": {
+                "group": "build",
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "dependsOn": "build",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "publish",
+                "/property:runtime=linux-arm",
+                "/property:GenerateFullPaths=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Opener"
+            },
+            "group": "build",
+            "presentation": {
+                "group": "build",
+                "reveal": "silent" 
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "deploy",
+            "dependsOn": "publish",
+            "type": "shell",
+            "linux": {
+                "command": "bash",
+                "args": [
+                    "-c",
+                    "rsync -avze ssh ${workspaceFolder}/Opener/bin/Debug/netcoreapp3.1/publish/ pi@192.168.0.18:'~/src/GarageOpener/'"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "group": "build",
+                "reveal": "always"
+            },
+            "problemMatcher": [                
+            ]
+        }
+    ]
+}
