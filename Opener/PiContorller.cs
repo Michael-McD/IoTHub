@@ -1,6 +1,7 @@
 using System;
-using System.Threading;
 using System.Device.Gpio;
+using Microsoft.Azure.Devices.Client;
+using System.Threading;
 
 namespace Opener
 {
@@ -38,7 +39,7 @@ namespace Opener
         }
         public void Stop()
         {
-            Console.WriteLine("Setting pins to HIGH then LOW.");
+            Console.WriteLine("Setting pins to HIGH -- i.e. off.");
             piController.Write(upPinNum, PinValue.High);
             piController.Write(downPinNum, PinValue.High);
         }
