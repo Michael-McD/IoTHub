@@ -9,7 +9,7 @@ namespace Opener
     {
         private DeviceClient s_deviceClient;
 
-       private readonly static string s_connectionString =Environment.GetEnvironmentVariable("DEVICE_CON_STR");
+       private readonly static string s_connectionString = Environment.GetEnvironmentVariable("DEVICE_CONN_STR");
        private PiController piController;
 
         public void StartProcessor()
