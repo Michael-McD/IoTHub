@@ -28,6 +28,8 @@ This requires both the Azure CLI and Azure IoT Sdk to be install on the developm
 $ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 $ az extension add --name azure-iot```
 
+Create the infrastructure using the `Infrastructure.sh` shell script. You will need to be logged into the Azure CLI.  In addition to building the infrastructure the script will print out the the Device and Service connection strings. I have assigned these to environment variables on the Pi and reference them in the code.
+
 
 ## The code
 Currently a WIP.
