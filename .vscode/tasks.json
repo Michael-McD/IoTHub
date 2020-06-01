@@ -33,7 +33,7 @@
             ],
             "options": {
                 "cwd": "${workspaceFolder}/Opener"
-            },
+            }, 
             "group": "build",
             "presentation": {
                 "group": "build",
@@ -49,16 +49,18 @@
                 "command": "bash",
                 "args": [
                     "-c",
-                    "rsync -avze ssh ${workspaceFolder}/Opener/bin/Debug/netcoreapp3.1/publish/ pi@192.168.0.18:'~/src/GarageOpener/'"
+                    "rsync -avze ssh ./bin/Debug/netcoreapp3.1/publish/ pi@192.168.0.18:'~/src/GarageOpener/'"
                 ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/Opener"
             },
             "group": "build",
             "presentation": {
                 "group": "build",
                 "reveal": "always"
             },
-            "problemMatcher": [                
-            ]
+            "problemMatcher": []
         }
     ]
 }

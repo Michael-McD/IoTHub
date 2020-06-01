@@ -15,14 +15,9 @@
                 "pipeProgram": "/usr/bin/ssh",
                 "pipeArgs": [
                     "-T", "-i", "/home/michael/.ssh/id_rsa",
-                    "pi@192.168.0.18"
-                ],
+                    "pi@192.168.0.18"],
                 "debuggerPath": "/home/pi/vsdbg/vsdbg"
-            },
-            // "sourceFileMap": {
-            //     "/home/michael/src/GarageOpener/Opener": "/home/pi/src/GarageOpener"
-            // },
-            "logging": {
+            },"logging": {
                 "engineLogging": true
             }
         }
