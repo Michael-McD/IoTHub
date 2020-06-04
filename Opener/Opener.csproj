@@ -1,13 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>5e046a4a-1108-4325-b002-fc8a7a19b340</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.25.0" />
     <PackageReference Include="System.Device.Gpio" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.*" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.*" />
   </ItemGroup>
-
+   <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+  </ItemGroup>
 </Project>

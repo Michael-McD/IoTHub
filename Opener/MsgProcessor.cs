@@ -1,7 +1,10 @@
 using System;
-using Microsoft.Azure.Devices.Client;
-using System.Threading.Tasks;
+using System.Device.Gpio;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Azure.Devices.Client;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Opener
 {
@@ -9,17 +12,20 @@ namespace Opener
     {
         private DeviceClient s_deviceClient;
 
-       private readonly static string s_connectionString = Environment.GetEnvironmentVariable("DEVICE_CONN_STR");
-       private PiController piController;
+        IServiceProvider services = ServiceProviderBuilder.GetServiceProvider(Array.Empty<string>());
+
+        private PiController piController;
 
         public void StartProcessor()
         {
             Console.WriteLine("Door Mesage Processor Listening. Ctrl-C to exit.\n");
 
-            piController = new PiController(new System.Device.Gpio.GpioController());
+            var secret = services.GetRequiredService<IOptions<SecretOptions>>();
+
+            piController = new PiController(new GpioController(PinNumberingScheme.Board));
 
             // Connect to the IoT hub using the MQTT protocol
-            s_deviceClient = DeviceClient.CreateFromConnectionString(s_connectionString, TransportType.Mqtt);
+            s_deviceClient = DeviceClient.CreateFromConnectionString(secret.Value.DeviceConnStr, TransportType.Mqtt);
 
             // Create a handler for the direct method call
             s_deviceClient.SetMethodHandlerAsync("OperateDoor", OperateDoor, null).Wait();
@@ -52,7 +58,7 @@ namespace Opener
 
             // Acknowledge the direct method call with a 200 success message
             result = "{\"result\":\"Executed direct method: " + methodRequest.Name + "\"}";
-            return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(result), 200));            
+            return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(result), 200));
         }
     }
 }

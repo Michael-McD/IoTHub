@@ -1,10 +1,15 @@
 ﻿using System;
-using System.Device.Gpio;
+using System.IO;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection.Abstractions;
 
 namespace Opener
 {
     public static class Program
     {
+        public static IConfigurationRoot Configuration { get; set; }
         static void Main(string[] args)
         {
             Console.WriteLine("Hello From Raspberry PI.");
@@ -13,32 +18,7 @@ namespace Opener
             var msgProcessor = new MsgProcessor();
             msgProcessor.StartProcessor();
 
-            // var run = true;
-            // while (run)
-            // {
-            //     Console.WriteLine("Enter command: Up, Down, Stop or exit.");
-            //     var input = Console.ReadLine().ToLower();
 
-            //     switch (input)
-            //     {
-            //         case "up":
-            //             piController.Up();
-            //             break;
-            //         case "down":
-            //             piController.Down();
-            //             break;
-            //         case "stop":
-            //             piController.Stop();
-            //             break;
-            //         case "exit":
-            //             run = false;
-            //             piController.Exit();
-            //             break;
-            //         default:
-            //             Console.WriteLine("Please enter a valid command.");
-            //             break;
-            //     }
-            // }
         }
     }
 }

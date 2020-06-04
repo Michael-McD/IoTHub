@@ -1,6 +1,5 @@
 using System;
 using System.Device.Gpio;
-using Microsoft.Azure.Devices.Client;
 using System.Threading;
 
 namespace Opener
@@ -19,9 +18,6 @@ namespace Opener
 
             piController.OpenPin(upPinNum, PinMode.Output);
             piController.OpenPin(downPinNum, PinMode.Output);
-
-            piController.Write(upPinNum, PinValue.High);
-            piController.Write(downPinNum, PinValue.High);
         }
 
         public void Up()
