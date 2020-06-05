@@ -32,7 +32,8 @@ Create the infrastructure using the `Infrastructure.sh` shell script. You will n
 
 
 ## The code
-Currently a WIP.
+Secrets including Device Connection info is stored using the new [Dotnet Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows).
+
 
 
 ### SSH requirements

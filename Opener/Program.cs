@@ -1,9 +1,5 @@
 ﻿using System;
-using System.IO;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection.Abstractions;
 
 namespace Opener
 {
@@ -12,13 +8,13 @@ namespace Opener
         public static IConfigurationRoot Configuration { get; set; }
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello From Raspberry PI.");
+            Console.WriteLine("Starting Garage Door Opener listener.");
 
-            //var piController = new PiController(new GpioController(PinNumberingScheme.Board));
             var msgProcessor = new MsgProcessor();
             msgProcessor.StartProcessor();
 
-
+            Console.WriteLine("Ctl-C or enter CRLF to close.");
+            Console.ReadLine();
         }
     }
 }
