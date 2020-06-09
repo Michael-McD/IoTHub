@@ -5,37 +5,40 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.Text.Json;
+using Opener.Models;
 
 namespace Opener
 {
     public class MsgProcessor
     {
-        private DeviceClient s_deviceClient;
-
-        IServiceProvider services = ServiceProviderBuilder.GetServiceProvider(Array.Empty<string>());
+        private DeviceClient deviceClient;
+        readonly IServiceProvider services = ServiceProviderBuilder.GetServiceProvider(Array.Empty<string>());
 
         private PiController piController;
 
         public void StartProcessor()
         {
-            Console.WriteLine("Door Mesage Processor Listening. Ctrl-C to exit.\n");
+            Console.WriteLine("Door Message Processor Listening. Ctrl-C to exit.\n");
 
             var secret = services.GetRequiredService<IOptions<SecretOptions>>();
 
             piController = new PiController(new GpioController(PinNumberingScheme.Board));
 
             // Connect to the IoT hub using the MQTT protocol
-            s_deviceClient = DeviceClient.CreateFromConnectionString(secret.Value.DeviceConnStr, TransportType.Mqtt);
+            deviceClient = DeviceClient.CreateFromConnectionString(secret.Value.DeviceConnStr, TransportType.Mqtt);
 
             // Create a handler for the direct method call
-            s_deviceClient.SetMethodHandlerAsync("OperateDoor", OperateDoor, null).Wait();
+            deviceClient.SetMethodHandlerAsync("OperateDoor", OperateDoor, null).Wait();
         }
 
         // Handle the direct method call
         private Task<MethodResponse> OperateDoor(MethodRequest methodRequest, object userContext)
         {
-            var data = Encoding.UTF8.GetString(methodRequest.Data);
+            var command = Encoding.UTF8.GetString(methodRequest.Data);
             string result;
+
+            var garageCommand = JsonSerializer.Deserialize<GarageCommand>(command);
 
             switch (data)
             {

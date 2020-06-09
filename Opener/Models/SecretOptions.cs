@@ -1,4 +1,4 @@
-namespace Opener
+namespace Opener.Models
 {
     public class SecretOptions
     {
