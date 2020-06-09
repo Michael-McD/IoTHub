@@ -40,6 +40,8 @@ namespace Opener
 
             var garageCommand = JsonSerializer.Deserialize<GarageCommand>(command);
 
+            Console.WriteLine($"Incoming command: {garageCommand.Value}");
+
             switch (garageCommand.Value)
             {
                 case "up":
@@ -55,7 +57,7 @@ namespace Opener
                     piController.Exit();
                     break;
                 default:
-                    result = "{\"result\":\"Invalid parameter\"}";
+                    result = "{\"result\":\"Invalid parameter = " + command + " \"}";
                     return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(result), 400));
             }
 

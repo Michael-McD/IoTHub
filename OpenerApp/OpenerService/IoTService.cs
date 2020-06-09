@@ -21,7 +21,7 @@ namespace OpenerService
         private static async Task InvokeUp()
         {
             var methodInvocation = new CloudToDeviceMethod("OperateDoor") { ResponseTimeout = TimeSpan.FromSeconds(30) };
-            methodInvocation.SetPayloadJson("{'value':'up'}");
+            methodInvocation.SetPayloadJson("{'Value':'up'}");
 
             // Invoke the direct method asynchronously and get the response from the simulated device.
             var response = await serviceClient.InvokeDeviceMethodAsync("DoorOpener", methodInvocation);
