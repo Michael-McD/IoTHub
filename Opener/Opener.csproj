@@ -4,6 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>5e046a4a-1108-4325-b002-fc8a7a19b340</UserSecretsId>
+    <Configurations>Debug;Release;Remote Debug</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.25.0" />

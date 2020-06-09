@@ -1,6 +1,7 @@
-namespace Opener
+namespace Opener.Models
 {
-    internal class GarageCommand
+    public class GarageCommand
     {
+        public string Value { get; set; }
     }
 }

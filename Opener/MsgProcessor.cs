@@ -40,7 +40,7 @@ namespace Opener
 
             var garageCommand = JsonSerializer.Deserialize<GarageCommand>(command);
 
-            switch (data)
+            switch (garageCommand.Value)
             {
                 case "up":
                     piController.Up();
