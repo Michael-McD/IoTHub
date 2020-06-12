@@ -6,20 +6,26 @@ namespace OpenerService.Test
 {
     public class DoorOpenerTests
     {
-        [Fact]
-        public void Test1()
-        {
-            var iotService = new IoTService();
-            var actual = iotService.Test();
-
-            Assert.Equal("Test method called.", actual);
-        }
-
+        // az iot hub show-connection-string --policy-name service --name GarageDoorHub-y500ew --output tsv
+        private readonly string ConnStr = "";
+        
         [Fact]
         public void DoorUp()
         {
-            var iotService = new IoTService();
+            var iotService = new IoTService(ConnStr);
             iotService.DoorUp();
+        }
+        [Fact]
+        public void DoorDown()
+        {
+            var iotService = new IoTService(ConnStr);
+            iotService.DoorDown();
+        }
+        [Fact]
+        public void DoorStop()
+        {
+            var iotService = new IoTService(ConnStr);
+            iotService.DoorStop();
         }
     }
 }
