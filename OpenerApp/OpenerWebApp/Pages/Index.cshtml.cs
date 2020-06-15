@@ -22,7 +22,8 @@ namespace OpenerWebApp.Pages
 
         public void OnGet()
         {
-            Txt = $"Secret Conn Str: {secrets.ServiceConnStr}";
+            string connStr = secrets.ServiceConnStr ?? "Not Found";
+            Txt = $"Secret Conn Str: {connStr}";
         }
 
         [Microsoft.AspNetCore.Mvc.NonAction]
