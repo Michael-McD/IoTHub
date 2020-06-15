@@ -33,7 +33,7 @@ namespace OpenerWebApp
                                 azureServiceTokenProvider.KeyVaultTokenCallback));
 
                         config.AddAzureKeyVault(
-                            $"https://{builtConfig["GarageDoorOpenerKeyVault"]}.vault.azure.net/",
+                            $"https://GarageDoorOpenerKeyVault.vault.azure.net/",
                             keyVaultClient,
                             new DefaultKeyVaultSecretManager());
                     }
