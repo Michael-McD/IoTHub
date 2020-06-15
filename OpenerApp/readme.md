@@ -1,4 +1,5 @@
-# Garage Door Opener Web App and service - CSharp
+# Garage Door Opener 
+Web App and service - CSharp
 The OpenerWebApp is used to send control signals to the Raspberry Pi. It is deployed separately form the Opener device.  I.e. the device code is deployed to the Raspberry Pi while the web app is deployed up to the cloud.
 
 ### Background
@@ -13,7 +14,7 @@ Development uses the Secret Manager Tool to store secrets locally.  While in Pro
 
 The secrets in question are the connection strings for the IoT Hub (the Service conn str) and the Device's connection string. Only the former needs to be configured for the web app. (The device always runs in developer mode.)  Follow the instructions given in the above links to store the service connection string.
 
-Two useful commands (once the web app resource has been created):
+Two useful commands (once the web app resource has been created): 
 
 Enable System Assigned Identity for the web app: `az webapp identity assign -g MyResourceGroup -n MyUniqueApp`
 
