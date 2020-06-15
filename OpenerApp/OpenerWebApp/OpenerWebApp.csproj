@@ -3,6 +3,10 @@
   <ItemGroup>
     <ProjectReference Include="..\OpenerService\OpenerService.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.5" />
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>5e046a4a-1108-4325-b002-fc8a7a19b340</UserSecretsId>
