@@ -13,6 +13,7 @@ namespace OpenerWebApp.Pages
     public class IndexModel : PageModel
     {
         private readonly Secrets secrets;
+        public string Txt;
 
         public IndexModel(IConfiguration config)
         {            
@@ -21,6 +22,7 @@ namespace OpenerWebApp.Pages
 
         public void OnGet()
         {
+            Txt = $"Secret Conn Str: {secrets.ServiceConnStr}";
         }
 
         [Microsoft.AspNetCore.Mvc.NonAction]
