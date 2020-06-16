@@ -6,45 +6,48 @@ namespace Opener
 {
     public class PiController
     {
-        private readonly GpioController piController;
+        private readonly GpioController gpioController;
         private readonly int upPinNum = 7;
 
         private readonly int downPinNum = 11;
-        private readonly int duration = 300;
+        private readonly int duration = 3000;
 
         public PiController(GpioController controller)
         {
-            piController = controller;
+            gpioController = controller;
 
-            piController.OpenPin(upPinNum, PinMode.Output);
-            piController.OpenPin(downPinNum, PinMode.Output);
+            gpioController.OpenPin(upPinNum, PinMode.Output);
+            gpioController.OpenPin(downPinNum, PinMode.Output);
         }
 
         public void Up()
         {
-            piController.Write(upPinNum, PinValue.Low);
+            gpioController.Write(upPinNum, PinValue.Low);
             Thread.Sleep(duration);
-            Stop();
+            Down();
+            Down();
         }
 
         public void Down()
         {
-            piController.Write(downPinNum, PinValue.Low);
+            gpioController.Write(downPinNum, PinValue.Low);
             Thread.Sleep(duration);
-            Stop();
+
+            gpioController.Write(upPinNum, PinValue.High);
+            gpioController.Write(downPinNum, PinValue.High);
         }
         public void Stop()
         {
             Console.WriteLine("Setting pins to HIGH -- i.e. off.");
-            piController.Write(upPinNum, PinValue.High);
-            piController.Write(downPinNum, PinValue.High);
+            gpioController.Write(upPinNum, PinValue.High);
+            gpioController.Write(downPinNum, PinValue.High);
         }
 
         internal void Exit()
         {            
             Console.WriteLine("Closing pins.");
-            piController.ClosePin(upPinNum);
-            piController.ClosePin(downPinNum);
+            gpioController.ClosePin(upPinNum);
+            gpioController.ClosePin(downPinNum);
         }
 
         public void Test()

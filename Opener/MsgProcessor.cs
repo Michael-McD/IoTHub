@@ -61,7 +61,6 @@ namespace Opener
                     return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(result), 400));
             }
 
-            // Acknowledge the direct method call with a 200 success message
             result = "{\"result\":\"Executed direct method: " + methodRequest.Name + "\"}";
             return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(result), 200));
         }
