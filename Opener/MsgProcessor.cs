@@ -32,6 +32,14 @@ namespace Opener
             deviceClient.SetMethodHandlerAsync("OperateDoor", OperateDoor, null).Wait();
         }
 
+        public void StopProcessor()
+        {
+            if (piController != null)
+            {
+                piController.Exit();
+            }            
+        }
+
         // Handle the direct method call
         private Task<MethodResponse> OperateDoor(MethodRequest methodRequest, object userContext)
         {

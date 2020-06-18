@@ -1,20 +1,39 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Opener
 {
     public static class Program
     {
         public static IConfigurationRoot Configuration { get; set; }
-        static void Main(string[] args)
+
+        public static async Task Main(string[] args)
         {
-            Console.WriteLine("Starting Garage Door Opener listener.");
+            var builder = new HostBuilder()
+                .UseSystemd()
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddEnvironmentVariables();
 
-            var msgProcessor = new MsgProcessor();
-            msgProcessor.StartProcessor();
+                    if (args != null)
+                    {
+                        config.AddCommandLine(args);
+                    }
+                })
+                .ConfigureServices((hostContext, services) =>
+                {
+                    _ = services.AddHostedService<Worker>();
+                })
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.AddConsole();
+                });
 
-            Console.WriteLine("Ctl-C or enter CRLF to close.");
-            Console.ReadLine();
+            await builder.Build().RunAsync();
         }
     }
 }

@@ -48,6 +48,8 @@ namespace Opener
             Console.WriteLine("Closing pins.");
             gpioController.ClosePin(upPinNum);
             gpioController.ClosePin(downPinNum);
+
+            gpioController.Dispose();
         }
 
         public void Test()
