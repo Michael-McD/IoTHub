@@ -8,29 +8,29 @@ namespace Opener
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<Worker> logger;
 
         public Worker(ILogger<Worker> logger)
         {
-            _logger = logger;
+            this.logger = logger;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {            
-            Console.WriteLine("Starting Garage Door Opener listener.");
+            logger.LogInformation("Starting Garage Door Opener listener at: {time}", DateTimeOffset.Now);
 
             var msgProcessor = new MsgProcessor();
             msgProcessor.StartProcessor();
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
+                logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                await Task.Delay(3000, stoppingToken);
             }
 
             if (stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("CancellationToken received!");
+                logger.LogInformation("CancellationToken received!");
                 msgProcessor.StopProcessor();
             }
         }

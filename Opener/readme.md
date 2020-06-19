@@ -5,6 +5,8 @@ State are triggered upon receiving messages from the Azure IoT Hub. The IoT Hub 
 
 The progame makes use of Visual Studio Codes `tasks` and `launch` configurations to run the code in remote debug mode on the Raspberry Pi while developing on a Linux PC.
 
+The program is actually designed to run as a Linux Daemon under `systemd`.  However it can still be launched from the command line if required e.g. `dotnet Opener.dll`.  Details for setting up `systemd` __unit__ files is presented towards the end of this readme.md document.
+
 
 ## .vscode/task.json
 There are 3 tasks

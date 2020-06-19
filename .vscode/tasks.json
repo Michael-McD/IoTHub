@@ -21,11 +21,60 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "build-release",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "--runtime", "linux-arm",
+                "/property:configuration=Release",
+                "/property:framework=netcoreapp3.1",
+                "/property:GenerateFullPaths=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Opener"
+            },
+            "group": "build",
+            "presentation": {
+                "group": "build",
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "build",
             "command": "dotnet",
             "type": "shell",
             "args": [
                 "build",
+                "--runtime",
+                "linux-arm",
+                "/property:configuration=Debug",
+                "/property:framework=netcoreapp3.1",
+                "/property:GenerateFullPaths=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Opener"
+            },
+            "group": "build",
+            "presentation": {
+                "group": "build",
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish-release",
+            "dependsOn": "build-release",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "publish",
+                "--runtime", "linux-arm",
+                "/property:configuration=Release",
+                "/property:framework=netcoreapp3.1",
                 "/property:GenerateFullPaths=false",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -46,17 +95,19 @@
             "type": "shell",
             "args": [
                 "publish",
-                "/property:runtime=linux-arm",
+                "--runtime", "linux-arm",
+                "/property:configuration=Debug",
+                "/property:framework=netcoreapp3.1",
                 "/property:GenerateFullPaths=false",
                 "/consoleloggerparameters:NoSummary"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/Opener"
-            }, 
+            },
             "group": "build",
             "presentation": {
                 "group": "build",
-                "reveal": "silent" 
+                "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
         },
@@ -68,7 +119,28 @@
                 "command": "bash",
                 "args": [
                     "-c",
-                    "rsync -avze ssh ./bin/Debug/netcoreapp3.1/publish/ pi@192.168.0.18:'~/src/GarageOpener/'"
+                    "rsync -avze ssh ./bin/Debug/netcoreapp3.1/linux-arm/publish/ pi@192.168.0.18:'~/src/GarageOpener/'"
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/Opener"
+            },
+            "group": "build",
+            "presentation": {
+                "group": "build",
+                "reveal": "always"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "deploy-release",
+            "dependsOn": "publish-release",
+            "type": "shell",
+            "linux": {
+                "command": "bash",
+                "args": [
+                    "-c",
+                    "rsync -avze ssh ./bin/Release/netcoreapp3.1/linux-arm/publish/ pi@192.168.0.18:'~/src/GarageOpener/'"
                 ]
             },
             "options": {
