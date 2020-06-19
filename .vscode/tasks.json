@@ -119,7 +119,7 @@
                 "command": "bash",
                 "args": [
                     "-c",
-                    "rsync -avze ssh ./bin/Debug/netcoreapp3.1/linux-arm/publish/ pi@192.168.0.18:'~/src/GarageOpener/'"
+                    "rsync -avze ssh ./bin/Debug/netcoreapp3.1/linux-arm/publish/ pi@192.168.0.18:'/opt/GarageOpener/'"
                 ]
             },
             "options": {
@@ -140,7 +140,7 @@
                 "command": "bash",
                 "args": [
                     "-c",
-                    "rsync -avze ssh ./bin/Release/netcoreapp3.1/linux-arm/publish/ pi@192.168.0.18:'~/src/GarageOpener/'"
+                    "rsync -avze ssh ./bin/Release/netcoreapp3.1/linux-arm/publish/ pi@192.168.0.18:'/opt/garage-door-opener'"
                 ]
             },
             "options": {

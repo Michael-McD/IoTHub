@@ -52,3 +52,9 @@ You will also need to add the hosts public SSH key (e.g. _id_rsa.pub_) to the Pi
 $ cd ~/.ssh
 $ cat id_rsa.pub | ssh pi@192.168.0.18 'cat >> .ssh/authorized_keys'
 ```
+In addition you will need to give your `pi` user permissions to write to the /opt/garage-door-opener folder.
+```
+sudo chown -R pi: /opt/garage-door-opener
+chmod -R u=rw,go=r /opt/garage-door-opener
+find /opt/garage-door-opener -type d | xargs chmod u+x
+```
