@@ -2,7 +2,7 @@
 echo "Building an Azure IoT Hub..."
 
 # Used to insure the IoT Hub name is unique.
-RANDOM_VALUE=y500ew #$RANDOM
+RANDOM_VALUE=y$RANDOM
 # London
 LOCATION=uksouth
 RESOURCE_GROUP=GarageDoor
