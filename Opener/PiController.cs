@@ -7,9 +7,9 @@ namespace Opener
     public class PiController
     {
         private readonly GpioController gpioController;
-        private readonly int upPinNum = 7;
+        private readonly int upPinNum = 24;
+        private readonly int downPinNum = 26;
 
-        private readonly int downPinNum = 11;
         private readonly int duration = 3000;
 
         public PiController(GpioController controller)
@@ -17,7 +17,10 @@ namespace Opener
             gpioController = controller;
 
             gpioController.OpenPin(upPinNum, PinMode.Output);
+            gpioController.Write(upPinNum, PinValue.High);
+
             gpioController.OpenPin(downPinNum, PinMode.Output);
+            gpioController.Write(downPinNum, PinValue.High);
         }
 
         public void Up()

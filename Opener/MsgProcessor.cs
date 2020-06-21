@@ -13,23 +13,23 @@ namespace Opener
     public class MsgProcessor
     {
         private DeviceClient deviceClient;
-        readonly IServiceProvider services = ServiceProviderBuilder.GetServiceProvider(Array.Empty<string>());
+        private IServiceProvider services;
 
-        private PiController piController;
+        private PiController piController = new PiController(new GpioController(PinNumberingScheme.Board));
 
-        public void StartProcessor()
+        public async void StartProcessorAsync()
         {
             Console.WriteLine("Door Message Processor Listening. Ctrl-C to exit.\n");
 
-            var secret = services.GetRequiredService<IOptions<SecretOptions>>();
+            services = ServiceProviderBuilder.GetServiceProvider(Array.Empty<string>());
 
-            piController = new PiController(new GpioController(PinNumberingScheme.Board));
+            var secret = services.GetRequiredService<IOptions<SecretOptions>>();
 
             // Connect to the IoT hub using the MQTT protocol
             deviceClient = DeviceClient.CreateFromConnectionString(secret.Value.DeviceConnStr, TransportType.Mqtt);
 
             // Create a handler for the direct method call
-            deviceClient.SetMethodHandlerAsync("OperateDoor", OperateDoor, null).Wait();
+            await deviceClient.SetMethodHandlerAsync("OperateDoor", OperateDoor, null);
         }
 
         public void StopProcessor()

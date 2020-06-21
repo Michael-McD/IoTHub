@@ -20,15 +20,9 @@ namespace Opener
             logger.LogInformation("Starting Garage Door Opener listener at: {time}", DateTimeOffset.Now);
 
             var msgProcessor = new MsgProcessor();
-            msgProcessor.StartProcessor();
+            msgProcessor.StartProcessorAsync();
 
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(3000, stoppingToken);
-            }
-
-            if (stoppingToken.IsCancellationRequested)
+           if (stoppingToken.IsCancellationRequested)
             {
                 logger.LogInformation("CancellationToken received!");
                 msgProcessor.StopProcessor();
