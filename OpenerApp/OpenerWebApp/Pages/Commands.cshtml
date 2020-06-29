@@ -1,0 +1,24 @@
+﻿@page
+@model CommandsModel
+@{
+    ViewData["Title"] = "Garage Door Commands";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Shut the Door!</h1>
+    <p>
+        <form method="post">
+           <button type="submit" asp-route-data="up" asp-page-handler="DoorAction">Up</button>
+        </form>
+    </p> 
+    <p>
+        <form method="post">
+           <button type="submit" asp-route-data="down" asp-page-handler="DoorAction">Down</button>
+        </form>
+    </p> 
+    <p>
+        <form method="post">
+           <button type="submit" asp-route-data="stop" asp-page-handler="DoorAction">Stop</button>
+        </form>
+    </p> 
+</div>

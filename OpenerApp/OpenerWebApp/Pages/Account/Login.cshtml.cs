@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpenerWebApp.Models;
 
-namespace OpenerWebApp.Pages
+namespace OpenerWebApp.Pages.Account
 {
     public class LoginModel : PageModel
     {
@@ -24,8 +24,7 @@ namespace OpenerWebApp.Pages
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            public string Name { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -51,7 +50,7 @@ namespace OpenerWebApp.Pages
 
             if (ModelState.IsValid)
             {
-                var user = await AuthenticateUser(Input.Email, Input.Password);
+                var user = await AuthenticateUser(Input.Name, Input.Password);
 
                 if (user == null)
                 {
@@ -61,7 +60,7 @@ namespace OpenerWebApp.Pages
 
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.Email),
+                    new Claim(ClaimTypes.Name, user.Name),
                     new Claim("FullName", user.FullName)
                 };
 
@@ -75,24 +74,18 @@ namespace OpenerWebApp.Pages
                 return LocalRedirect(Url.GetLocalUrl(returnUrl));
             }
 
-            // Something failed. Redisplay the form.
             return Page();
         }
 
-        private async Task<User> AuthenticateUser(string email, string password)
+        private async Task<User> AuthenticateUser(string name, string password)
         {
-            // For demonstration purposes, authenticate a user
-            // with a static email address. Ignore the password.
-            // Assume that checking the database takes 500ms
-
-            await Task.Delay(500);
-
-            if (string.Equals(email, "maria.rodriguez@contoso.com", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(name, "michael", StringComparison.OrdinalIgnoreCase) 
+                && string.Equals(password, "foogoobar", StringComparison.OrdinalIgnoreCase))
             {
                 return new User()
                 {
-                    Email = "maria.rodriguez@contoso.com",
-                    FullName = "Maria Rodriguez"
+                    Name = "michael.mcdowell@hotmail.co.uk",
+                    FullName = "Michael McD."
                 };
             }
             else
