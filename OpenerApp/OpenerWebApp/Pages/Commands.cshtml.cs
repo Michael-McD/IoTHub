@@ -24,8 +24,7 @@ namespace OpenerWebApp.Pages
             }
             else
             {
-                var secrets = config.GetSection("Opener.Models.SecretOptions").Get<Secrets>();
-                serviceConnStr = secrets.ServiceConnStr;
+                serviceConnStr = config["Opener.Models.SecretOptions:ServiceConnStr"];
             }
             this.config = config;
         }

@@ -27,23 +27,7 @@ Development uses the Secret Manager Tool to store secrets locally.  While in Pro
 
 The secrets in question are the connection strings for the IoT Hub (the Service conn str) and the Device's connection string. Only the former needs to be configured for the web app. (The device always runs in developer mode.)  
 
-Some useful commands: 
-
-Enable System Assigned Identity for the web app: `az webapp identity assign -g MyResourceGroup -n MyUniqueApp`
-
-Find the apps Id: `az webapp identity show --name MyWebapp --resource-group MyResourceGroup`
-
-Restart the webapp: `az webapp restart --name MyWebapp --resource-group MyResourceGroup`
-
-### Key Vault setup
-
-* Create the Key Vault: `az keyvault create --name MyKeyVault --resource-group "MyResourceGroup" --location us east`
-
-* Get the Service Connection String from the output of the Device_Infrastructure.sh script (or run this `az iot hub show-connection-string --policy-name service --name MyIoTHub --output tsv`).
-
-* Add the connection string: `az keyvault secret set --vault-name MyVaultName --name "SecretName" --value "MyIoTConnectionString"`
-
-* Set the policy so the app can access the Key Vault: `az keyvault create --name MyKeyVault --resource-group "MyResourceGroup" --location us east`
+See the `secrets.md` file at the root of this repository.
 
 ## Deploy to Azure
 
