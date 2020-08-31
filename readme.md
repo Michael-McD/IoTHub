@@ -1,4 +1,4 @@
-# Garage Door Opener Project - CSharp
+# Garage Door Opener IoT Hub Project - CSharp
 
 This is an IoT Project using a Raspberry Pi 3, and an Azure WebApp communicating via an Azure IoT Hub.
 
